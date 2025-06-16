@@ -1,0 +1,39 @@
+
+/* being shareda cross both html files. the only thing on the index.html is the button */
+
+body{
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+
+
+
+.container{
+    background-color: gray;
+    margin: 0;
+    padding: 0;
+
+}
+
+.displayBar{
+    background-color: lightgray;
+    height: 40px;
+    justify-content: center;
+    align-items: center;
+}
+
+button{
+    height: 40px;
+    width: 80px;
+}
+.operator{
+    background-color: orange;
+}
+
+.clear, .sign, .percent {
+    background-color: darkgray;
+}
