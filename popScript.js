@@ -1,12 +1,23 @@
-function createWindow() {
-    let popUpWindow = window.open(
-        "calcWindow.html",   // URL to open
-        "popupWindow",           // Name of the window
-        "width=400,height=300"   // Window features
-    );
-    popUpWindow.onload = () => { this.populateWindow(popUpWindow.document); };
+
+window.addEventListener("DOMContentLoaded", () => new Calculator());
+
+
+class Calculator{
+    constructor(){
+        console.log("Constructing instance of Game");
+        this.createWindow();
+        let firstVal = null;
+        let operator = null;
+        let secondVal = null;
+        let total = null;
+        let displayValue = null;
+    }
+createWindow() {
+    console.log("Creating Window");
+    this.populateWindow(document);
 };
-function populateWindow(doc) {
+populateWindow(doc) {
+    console.log("Window being populated");
     let container = doc.createElement("div");
     container.classList.add("container");
     container.style.display = "flex";
@@ -32,10 +43,34 @@ function populateWindow(doc) {
         container.appendChild(row);
     };
 
-    createButtons();
-}
-function createButtons(){
+    this.createButtons();
     
+}
+numberButtonPressedHelper(numberString){
+    seven.addEventListener("click", () => {
+        console.log(`${numberString} clicked`);
+        if (operator === null && total === null){
+            //then this is the first input
+            this.firstVal = numberString;
+        }
+        else if (operator === null) {
+            //ongoing multi-digit input
+            this.firstVal += numberString;
+        }
+        else{ //part of the second input
+            if (this.secondVal === null){
+                this.secondVal = numberString;
+            }
+            else{
+                this.secondVal += numberString;
+            }
+            
+        }
+
+    });
+}
+createButtons(){
+        console.log("buttons created");
 
     let rows = document.querySelectorAll(".row");
     
@@ -45,21 +80,43 @@ function createButtons(){
     AC.classList.add ("clear");
     AC.addEventListener("click", () => {
         console.log("Clear clicked");
-    })
+        this.firstVal = null;
+        this.operator = null;
+        this.secondVal = null;
+        this.total = null;
+        this.displayValue = null;
+
+    });
 
     rows[0].appendChild(AC);
 
     let sign = document.createElement("button");
     sign.textContent = "+/-";
     sign.classList.add ("sign");
+    sign.addEventListener("click", () => {
+        console.log("sign clicked");
+        this.firstVal = null;
+        this.operator = null;
+        this.secondVal = null;
+        this.total = null;
+        this.displayValue = null;
 
+    });
 
     rows[0].appendChild(sign);
 
     let percent = document.createElement("button");
     percent.textContent = "%";
     percent.classList.add ("percent");
+    percent.addEventListener("click", () => {
+        console.log("percent clicked");
+        this.firstVal = null;
+        this.operator = null;
+        this.secondVal = null;
+        this.total = null;
+        this.displayValue = null;
 
+    });
 
     rows[0].appendChild(percent);
 
@@ -67,7 +124,10 @@ function createButtons(){
     division.textContent = "/";
     division.classList.add ("divide");
     division.classList.add ("operator");
-
+    division.addEventListener("click", () => {
+        console.log("division clicked");
+        this.operator = "division"
+    });
 
     rows[0].appendChild(division);
 
@@ -76,13 +136,35 @@ function createButtons(){
     let seven = document.createElement("button");
     seven.textContent = "7";
     seven.classList.add ("number");
+    this.numberButtonPressedHelper("7");
     rows[1].appendChild(seven);
+
 
     let eight = document.createElement("button");
     eight.textContent = "8";
     eight.classList.add ("number");
     rows[1].appendChild(eight);
+    seven.addEventListener("click", () => {
+        console.log("7 clicked");
+        if (operator === null && total === null){
+            //then this is the first input
+            this.firstVal = "8";
+        }
+        else if (operator === null) {
+            //ongoing multi-digit input
+            this.firstVal += "8";
+        }
+        else{ //part of the second input
+            if (this.secondVal === null){
+                this.secondVal = "8";
+            }
+            else{
+                this.secondVal += "8";
+            }
+            
+        }
 
+    });
     let nine = document.createElement("button");
     nine.textContent = "9";
     nine.classList.add ("number");
@@ -142,7 +224,8 @@ function createButtons(){
 
 };
 
-function calculate(){
+ calculate(){
     
 }
-window.onload = () => populateWindow(document);
+};
+
